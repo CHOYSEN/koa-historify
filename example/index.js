@@ -32,7 +32,7 @@ const server = new Koa()
     root: __dirname,
     filePath: "/static/index.html"
   }))
-  .listen(9999)
+  .listen(9999, () => console.log("\n  > http://localhost:9999\n"))
 
 module.exports = {
   routes,

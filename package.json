@@ -4,10 +4,18 @@
   "main": "dist/index.js",
   "author": "CHOYSEN",
   "license": "MIT",
+  "types": "types/index.d.ts",
+  "bugs": "https://github.com/CHOYSEN/koa-historify/issues",
+  "homepage": "https://github.com/CHOYSEN/koa-historify#readme",
   "description": "Koa middleware for HTML5 history.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CHOYSEN/koa-historify.git"
+  },
   "scripts": {
     "test": "jest",
-    "build": "tsc"
+    "build": "tsc",
+    "example": "node ./example/index.js"
   },
   "keywords": [
     "vue",
