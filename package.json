@@ -19,7 +19,9 @@
   },
   "files": [
     "dist",
-    "types"
+    "types",
+    "README.md",
+    "README-zh_CN.md"
   ],
   "keywords": [
     "vue",
