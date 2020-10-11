@@ -1,7 +1,6 @@
 import { Middleware } from "koa";
 interface IOptions {
     root?: string;
-    filePath?: string;
 }
-declare function historify(options?: IOptions): Middleware;
+declare function historify(filepath: string, options?: IOptions): Middleware;
 export = historify;

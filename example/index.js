@@ -23,15 +23,13 @@ const routes = [
 
 const router = new Router()
 routes.forEach(item => {
-  router[item.method](item.path, ctx => ctx.body = `${item.method.toUpperCase()} ${item.path}`)
+  const body = `${item.method.toUpperCase()} ${item.path}`
+  router[item.method](item.path, ctx => ctx.body = body)
 })
 
 const server = new Koa()
   .use(router.routes())
-  .use(koaHistorify({
-    root: __dirname,
-    filePath: "/static/index.html"
-  }))
+  .use(koaHistorify("/static/index.html", { root: __dirname }))
   .listen(9999, () => console.log("\n  > http://localhost:9999\n"))
 
 module.exports = {

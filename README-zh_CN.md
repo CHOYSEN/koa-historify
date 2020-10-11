@@ -1,20 +1,20 @@
 # [koa-historify](https://github.com/CHOYSEN/koa-historify) 💫
-HTML5 history middleware for koa2 
+正确设置 HTML5 History API 的 Koa2 中间件 
 
-English | [中文](./README-zh_CN.md)
+[English](./README.md) | 中文
 
-## Usage
-Install
+## 使用
+安装
 ```
 npm install koa-historify --save
 ```
 
-Import
+引入
 ```js
 const koaHistorify = require('koa-historify')
 ```
 
-Use
+使用中间件
 ```js
 // ...
 const filepath = "/static/index.html"

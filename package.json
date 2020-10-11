@@ -1,29 +1,32 @@
 {
   "name": "koa-historify",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "main": "dist/index.js",
   "author": "CHOYSEN",
   "license": "MIT",
   "types": "types/index.d.ts",
   "bugs": "https://github.com/CHOYSEN/koa-historify/issues",
   "homepage": "https://github.com/CHOYSEN/koa-historify#readme",
-  "description": "Koa middleware for HTML5 history.",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/CHOYSEN/koa-historify.git"
-  },
+  "description": "HTML5 history middleware for koa2.",
   "scripts": {
     "test": "jest",
     "build": "tsc",
     "example": "node ./example/index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CHOYSEN/koa-historify.git"
+  },
+  "files": [
+    "dist",
+    "types"
+  ],
   "keywords": [
     "vue",
     "koa",
     "koa2",
-    "router",
-    "history",
-    "koa-historify"
+    "html5",
+    "history"
   ],
   "dependencies": {
     "@koa/router": "^9.4.0",
@@ -31,6 +34,7 @@
   },
   "devDependencies": {
     "@types/koa": "^2.11.4",
+    "@types/koa__router": "^8.0.3",
     "jest": "^26.4.2",
     "koa": "^2.13.0",
     "supertest": "^5.0.0"
