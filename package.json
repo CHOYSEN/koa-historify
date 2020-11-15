@@ -39,6 +39,6 @@
     "@types/koa__router": "^8.0.3",
     "jest": "^26.4.2",
     "koa": "^2.13.0",
-    "supertest": "^5.0.0"
+    "supertest": "^6.0.1"
   }
 }
