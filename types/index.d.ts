@@ -1,6 +1,6 @@
-import { Middleware } from "koa";
-interface IOptions {
-    root?: string;
+import type { Middleware } from 'koa';
+interface Options {
+    logger?: (msg: string, ...params: any[]) => void;
 }
-declare function historify(filepath: string, options?: IOptions): Middleware;
-export = historify;
+declare function koaHistorify(filepath: string, options?: Options): Middleware;
+export = koaHistorify;

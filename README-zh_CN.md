@@ -1,7 +1,7 @@
 # [koa-historify](https://github.com/CHOYSEN/koa-historify) 💫
 正确设置 HTML5 History API 的 Koa2 中间件 
 
-[English](./README.md) | 中文
+[English](https://github.com/CHOYSEN/koa-historify/blob/master/README.md) | 中文
 
 ## 使用
 安装
@@ -17,9 +17,9 @@ const koaHistorify = require('koa-historify')
 使用中间件
 ```js
 // ...
-const filepath = "/static/index.html"
+const indexPath = path.join(__dirname, 'static/index.html' /* index.html filepath */)
 new Koa()
   .use(router.routes())
-  .use(koaHistorify(filepath, { root: __dirname }))
-  .listen(9999)
+  .use(koaHistorify(indexPath))
+  .listen(80)
 ```

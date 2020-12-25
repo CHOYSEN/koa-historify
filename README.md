@@ -1,7 +1,7 @@
 # [koa-historify](https://github.com/CHOYSEN/koa-historify) 💫
 HTML5 history middleware for koa2 
 
-English | [中文](./README-zh_CN.md)
+English | [中文](https://github.com/CHOYSEN/koa-historify/blob/master/README-zh_CN.md)
 
 ## Usage
 Install
@@ -17,9 +17,9 @@ const koaHistorify = require('koa-historify')
 Use
 ```js
 // ...
-const filepath = "/static/index.html"
+const indexPath = path.join(__dirname, 'static/index.html' /* index.html filepath */)
 new Koa()
   .use(router.routes())
-  .use(koaHistorify(filepath, { root: __dirname }))
-  .listen(9999)
+  .use(koaHistorify(indexPath))
+  .listen(80)
 ```

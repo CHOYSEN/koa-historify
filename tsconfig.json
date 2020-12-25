@@ -4,9 +4,10 @@
   ],
   "compilerOptions": {
     "outDir": "dist",
-    "target": "ESNext",
+    "target": "ES2019",
     "module": "CommonJS",
     "declaration": true,
-    "declarationDir": "types"
+    "declarationDir": "types",
+    "esModuleInterop": true
   }
 }
