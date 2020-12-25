@@ -19,7 +19,6 @@ const koaHistorify = require('koa-historify')
 // ...
 const indexPath = path.join(__dirname, 'static/index.html' /* index.html filepath */)
 new Koa()
-  .use(router.routes())
   .use(koaHistorify(indexPath))
   .listen(80)
 ```
