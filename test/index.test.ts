@@ -23,6 +23,7 @@ describe('Test request methods:', () => {
 
   it('should historify when HTTP request method is GET', async () => {
     const res = await supertest(server).get('/').set('Accept', 'text/html')
+    expect(res.status).toBe(200)
     expect(res.text).toBe(indexHtml)
   })
 })
@@ -40,6 +41,7 @@ describe('Test request header field "Accept":', () => {
 
   it('should historify when HTTP request header field "Accept" includes "text/html"', async () => {
     const res = await supertest(server).get('/').set('Accept', 'text/html')
+    expect(res.status).toBe(200)
     expect(res.text).toBe(indexHtml)
   })
 })
@@ -75,6 +77,7 @@ describe('Test ctx.body or ctx.status has been modified:', () => {
       .listen()
 
     const res = await supertest(server).get('/api').set('Accept', 'text/html')
+    expect(res.status).toBe(200)
     expect(res.text).toBe(content)
   })
 })
@@ -89,6 +92,7 @@ describe('Test non-existent routes:', () => {
     for (let i = 0; i < 5; i++) {
       const randomPath = Math.random().toString(36).replace('0.', '/')
       const res = await supertest(server).get(randomPath).set('Accept', 'text/html')
+      expect(res.status).toBe(200)
       expect(res.text).toBe(indexHtml)
     }
   })
