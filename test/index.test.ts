@@ -6,11 +6,12 @@ import supertest from 'supertest'
 import koaHistorify from '../src'
 
 let server = null
-const indexHtml = fs.readFileSync(path.join(__dirname, 'static/index.html')).toString()
+const indexPath = path.join(__dirname, 'static/index.html')
+const indexFile = fs.readFileSync(indexPath).toString()
 
 describe('Test request methods:', () => {
   server = new Koa()
-    .use(koaHistorify(path.join(__dirname, 'static/index.html')))
+    .use(koaHistorify(indexPath))
     .listen()
 
   it('should not historify when HTTP method is not GET', () => {
@@ -18,31 +19,33 @@ describe('Test request methods:', () => {
     methods.forEach(async method => {
       const res = await supertest(server)[method]('/').set('Accept', 'text/html')
       expect(res.status).toBe(404)
+      expect(res.text).not.toBe(indexFile)
     })
   })
 
   it('should historify when HTTP request method is GET', async () => {
     const res = await supertest(server).get('/').set('Accept', 'text/html')
     expect(res.status).toBe(200)
-    expect(res.text).toBe(indexHtml)
+    expect(res.text).toBe(indexFile)
   })
 })
 
 describe('Test request header field "Accept":', () => {
   server.close()
   server = new Koa()
-    .use(koaHistorify(path.join(__dirname, 'static/index.html')))
+    .use(koaHistorify(indexPath))
     .listen()
 
   it('should not historify when HTTP request header field "Accept" does not include "text/html"', async () => {
     const res = await supertest(server).get('/')
     expect(res.status).toBe(404)
+    expect(res.text).not.toBe(indexFile)
   })
 
   it('should historify when HTTP request header field "Accept" includes "text/html"', async () => {
     const res = await supertest(server).get('/').set('Accept', 'text/html')
     expect(res.status).toBe(200)
-    expect(res.text).toBe(indexHtml)
+    expect(res.text).toBe(indexFile)
   })
 })
 
@@ -54,12 +57,12 @@ describe('Test ctx.body or ctx.status has been modified:', () => {
         ctx.status = 204
         await next()
       })
-      .use(koaHistorify(path.join(__dirname, 'static/index.html')))
+      .use(koaHistorify(indexPath))
       .listen()
 
     const res = await supertest(server).get('/api').set('Accept', 'text/html')
-    expect(res.text).toBe('')
     expect(res.status).toBe(204)
+    expect(res.text).not.toBe(indexFile)
   })
 
   it("should not historify when ctx.body having content", async () => {
@@ -73,7 +76,7 @@ describe('Test ctx.body or ctx.status has been modified:', () => {
     server.close()
     server = new Koa()
       .use(router.routes())
-      .use(koaHistorify(path.join(__dirname, 'static/index.html')))
+      .use(koaHistorify(indexPath))
       .listen()
 
     const res = await supertest(server).get('/api').set('Accept', 'text/html')
@@ -85,7 +88,7 @@ describe('Test ctx.body or ctx.status has been modified:', () => {
 describe('Test non-existent routes:', () => {
   server.close()
   server = new Koa()
-    .use(koaHistorify(path.join(__dirname, 'static/index.html')))
+    .use(koaHistorify(indexPath))
     .listen()
 
   it('should historify when request has not been handled', async () => {
@@ -93,7 +96,7 @@ describe('Test non-existent routes:', () => {
       const randomPath = Math.random().toString(36).replace('0.', '/')
       const res = await supertest(server).get(randomPath).set('Accept', 'text/html')
       expect(res.status).toBe(200)
-      expect(res.text).toBe(indexHtml)
+      expect(res.text).toBe(indexFile)
     }
   })
 })
