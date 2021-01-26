@@ -7,12 +7,12 @@ interface Options {
 }
 
 function koaHistorify(filepath: string, options: Options = {}): Middleware {
-  if (!isEqualType(filepath, 'string')) {
+  if (typeof filepath !== 'string') {
     throw new TypeError('filepath must be a string')
   }
 
   const logger = options.logger ?? (() => { /* do nothing */ })
-  if (!isEqualType(logger, 'function')) {
+  if (typeof logger !== 'function') {
     throw new TypeError('options.logger must be a function')
   }
 
@@ -28,7 +28,7 @@ function koaHistorify(filepath: string, options: Options = {}): Middleware {
       return await next()
     }
 
-    if (ctx.status !== 404 || !isEqualType(ctx.body, 'undefined')) {
+    if (ctx.status !== 404 || ctx.body !== undefined) {
       logger(`Not historify ${ctx.url} [was handled by other middleware]`)
       return await next()
     }
@@ -43,11 +43,6 @@ function koaHistorify(filepath: string, options: Options = {}): Middleware {
       await next()
     }
   }
-}
-
-function isEqualType(object, type: string): boolean {
-  const typeString: string = Object.prototype.toString.call(object)
-  return type.toLowerCase() === typeString.slice(8, -1).toLowerCase()
 }
 
 export = koaHistorify
