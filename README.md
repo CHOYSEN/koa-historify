@@ -27,7 +27,7 @@ const indexPath = path.join(__dirname, 'static/index.html' /* index.html filepat
 
 const app = new Koa()
 // ...
-// ensure koa-historify is used after other middleware, otherwise use the `prepost` mode
+// ensure koa-historify is used after other middleware, otherwise use the `prepose` mode
 app.use(koaHistorify(indexPath)) 
 app.listen(80)
 ```
@@ -50,7 +50,7 @@ const indexPath = path.join(staticPath, 'index.html' /* index.html filepath */)
 
 const app = new Koa()
 app.use(koaHistorify(indexPath, {
-  prepost: true
+  prepose: true
 }))
 app.use(koaStatic(staticPath))
 app.use(router.routes())
