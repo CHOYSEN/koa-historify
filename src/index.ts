@@ -3,6 +3,7 @@ import koaSend from 'koa-send'
 import type { Context, Middleware } from 'koa'
 
 interface Options {
+  prepose?: boolean
   logger?: (msg: string, ...params) => void
 }
 
@@ -11,13 +12,17 @@ function koaHistorify(filepath: string, options: Options = {}): Middleware {
     throw new TypeError('filepath must be a string')
   }
 
-  const logger = options.logger ?? (() => { /* do nothing */ })
+  const {
+    prepose = false,
+    logger = () => { /* do nothing */ }
+  } = options
   if (typeof logger !== 'function') {
     throw new TypeError('options.logger must be a function')
   }
 
   const parsedPath = path.parse(filepath)
   return async function historify(ctx: Context, next) {
+    prepose && await next()
     if (ctx.method !== 'GET') {
       logger(`Not historify ${ctx.url} [not GET]`)
       return await next()
@@ -34,10 +39,12 @@ function koaHistorify(filepath: string, options: Options = {}): Middleware {
     }
 
     try {
-      const resolvedPath: string = await koaSend(ctx, parsedPath.base, {
-        root: parsedPath.dir
-      })
-      logger(`Historify from ${ctx.url} to ${resolvedPath} successfully`)
+      const resolvedPath: string = await koaSend(
+        ctx,
+        parsedPath.base,
+        { root: parsedPath.dir }
+      )
+      logger(`Historify from ${ctx.url} to ${resolvedPath} [successfully]`)
     } catch (err) {
       logger(`Not historify ${ctx.url} [${err.toString()}]`)
       await next()

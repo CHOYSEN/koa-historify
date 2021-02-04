@@ -101,4 +101,40 @@ describe('Test non-existent routes:', () => {
   })
 })
 
+describe('Test options:', () => {
+  it('should work with a logger', async () => {
+    let called = false
+
+    server.close()
+    server = new Koa()
+      .use(koaHistorify(indexPath, {
+        logger() {
+          called = true
+        }
+      }))
+      .listen()
+
+    await supertest(server).get('/')
+    expect(called).toBe(true)
+  })
+
+  it('should work when prepose mode', async () => {
+    const router = new Router()
+      .get('/api', async (ctx, next) => {
+        ctx.body = '/api'
+        await next()
+      })
+
+    server.close()
+    server = new Koa()
+      .use(koaHistorify(indexPath, { prepose: true }))
+      .use(router.routes())
+      .listen()
+
+    const res = await supertest(server).get('/').set('Accept', 'text/html')
+    expect(res.status).toBe(200)
+    expect(res.text).toBe(indexFile)
+  })
+})
+
 afterAll(() => server.close())
