@@ -21,12 +21,41 @@ yarn add koa-historify
 
 ## Usage
 ```js
-const Koa = require('koa')
+// ...
 const koaHistorify = require('koa-historify')
 const indexPath = path.join(__dirname, 'static/index.html' /* index.html filepath */)
-new Koa()
-  .use(koaHistorify(indexPath))
-  .listen(80)
+
+const app = new Koa()
+// ...
+// ensure koa-historify is used after other middleware, otherwise use the `prepost` mode
+app.use(koaHistorify(indexPath)) 
+app.listen(80)
+```
+
+## Options
+### logger
+You can provide a function that can log the information
+```js
+app.use(koaHistorify(indexPath, {
+  logger: console.log.bind(console)
+})) 
+```
+
+### prepose
+It can be used before other middleware is used when prepose mode
+```js
+// ...
+const staticPath = path.join(__dirname, 'static')
+const indexPath = path.join(staticPath, 'index.html' /* index.html filepath */)
+
+const app = new Koa()
+app.use(koaHistorify(indexPath, {
+  prepost: true
+}))
+app.use(koaStatic(staticPath))
+app.use(router.routes())
+// ...
+app.listen(80)
 ```
 
 ## License
