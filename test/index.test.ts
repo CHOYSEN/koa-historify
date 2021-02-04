@@ -119,9 +119,10 @@ describe('Test options:', () => {
   })
 
   it('should work when prepose mode', async () => {
+    const content = 'ctx.body has been modified'
     const router = new Router()
       .get('/api', async (ctx, next) => {
-        ctx.body = '/api'
+        ctx.body = content
         await next()
       })
 
@@ -131,9 +132,13 @@ describe('Test options:', () => {
       .use(router.routes())
       .listen()
 
-    const res = await supertest(server).get('/').set('Accept', 'text/html')
+    let res = await supertest(server).get('/').set('Accept', 'text/html')
     expect(res.status).toBe(200)
     expect(res.text).toBe(indexFile)
+
+    res = await supertest(server).get('/api').set('Accept', 'text/html')
+    expect(res.status).toBe(200)
+    expect(res.text).toBe(content)
   })
 })
 
