@@ -14,19 +14,48 @@
 ```
 npm install koa-historify --save
 ```
-OR
+或者
 ```
 yarn add koa-historify
 ```
 
 ## 使用
 ```js
-const Koa = require('koa')
+// ...
 const koaHistorify = require('koa-historify')
-const indexPath = path.join(__dirname, 'static/index.html' /* index.html filepath */)
-new Koa()
-  .use(koaHistorify(indexPath))
-  .listen(80)
+const indexPath = path.join(__dirname, 'static/index.html' /* index.html 路径 */)
+
+const app = new Koa()
+// ...
+// 确保在其它中间件之后使用，否则请使用 `prepost` 模式
+app.use(koaHistorify(indexPath)) 
+app.listen(80)
+```
+
+## Options
+### logger
+你可以传入一个函数来记录日志
+```js
+app.use(koaHistorify(indexPath, {
+  logger: console.log.bind(console)
+})) 
+```
+
+### prepose
+在 prepost 模式下，它可以在其他中间件使用之前使用
+```js
+// ...
+const staticPath = path.join(__dirname, 'static')
+const indexPath = path.join(staticPath, 'index.html' /* index.html 路径 */)
+
+const app = new Koa()
+app.use(koaHistorify(indexPath, {
+  prepost: true
+}))
+app.use(koaStatic(staticPath))
+app.use(router.routes())
+// ...
+app.listen(80)
 ```
 
 ## 开源许可
