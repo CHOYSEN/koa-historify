@@ -25,17 +25,20 @@ function koaHistorify(filepath: string, options: Options = {}): Middleware {
     prepose && await next()
     if (ctx.method !== 'GET') {
       logger(`Not historify ${ctx.url} [not GET]`)
-      return await next()
+      !prepose && await next()
+      return
     }
 
     if (!ctx.headers?.accept?.includes?.('text/html')) {
       logger(`Not historify ${ctx.url} [not accept html]`)
-      return await next()
+      !prepose && await next()
+      return
     }
 
     if (ctx.status !== 404 || ctx.body !== undefined) {
       logger(`Not historify ${ctx.url} [was handled by other middleware]`)
-      return await next()
+      !prepose && await next()
+      return
     }
 
     try {
@@ -47,7 +50,7 @@ function koaHistorify(filepath: string, options: Options = {}): Middleware {
       logger(`Historify from ${ctx.url} to ${resolvedPath} [successfully]`)
     } catch (err) {
       logger(`Not historify ${ctx.url} [${err.toString()}]`)
-      await next()
+      !prepose && await next()
     }
   }
 }
