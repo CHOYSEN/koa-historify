@@ -101,7 +101,37 @@ describe('Test non-existent routes:', () => {
   })
 })
 
+describe('Test filepath:', () => {
+  it('should call next() when filepath is wrong', async () => {
+    server.close()
+    server = new Koa()
+      .use(koaHistorify('no'))
+      .use(ctx => {
+        ctx.body = 'content'
+      })
+      .listen()
+
+    const res = await supertest(server).get('/').set('Accept', 'text/html')
+    expect(res.status).toBe(200)
+    expect(res.text).toBe('content')
+  })
+})
+
 describe('Test options:', () => {
+  test('"filepath" must be a string', () => {
+    expect(() => {
+      koaHistorify(null)
+    }).toThrow('filepath must be a string')
+  })
+
+  test('"options.logger" must be a function', () => {
+    expect(() => {
+      koaHistorify(indexPath, {
+        logger: null
+      })
+    }).toThrow('options.logger must be a function')
+  })
+
   it('should work with a logger', async () => {
     let called = false
 
