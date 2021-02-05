@@ -1,6 +1,6 @@
 import path from 'path'
 import koaSend from 'koa-send'
-import type { Context, Middleware } from 'koa'
+import type { Middleware } from 'koa'
 
 interface Options {
   prepose?: boolean
@@ -21,7 +21,7 @@ function koaHistorify(filepath: string, options: Options = {}): Middleware {
   }
 
   const parsedPath = path.parse(filepath)
-  return async function historify(ctx: Context, next) {
+  return async function historify(ctx, next) {
     prepose && await next()
     if (ctx.method !== 'GET') {
       logger(`Not historify ${ctx.url} [not GET]`)
@@ -42,7 +42,7 @@ function koaHistorify(filepath: string, options: Options = {}): Middleware {
     }
 
     try {
-      const resolvedPath: string = await koaSend(
+      const resolvedPath = await koaSend(
         ctx,
         parsedPath.base,
         { root: parsedPath.dir }
