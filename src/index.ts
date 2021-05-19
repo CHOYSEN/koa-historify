@@ -20,7 +20,7 @@ function koaHistorify(filepath: string, options: Options = {}): Middleware {
     throw new TypeError('options.logger must be a function')
   }
 
-  const parsedPath = path.parse(filepath)
+  const { dir, base } = path.parse(filepath)
   return async function historify(ctx, next) {
     prepose && await next()
     if (ctx.method !== 'GET') {
@@ -29,7 +29,7 @@ function koaHistorify(filepath: string, options: Options = {}): Middleware {
       return
     }
 
-    if (!ctx.headers?.accept?.includes?.('text/html')) {
+    if (!ctx.headers.accept?.includes?.('text/html')) {
       logger(`Not historify ${ctx.url} [not accept html]`)
       !prepose && await next()
       return
@@ -42,11 +42,7 @@ function koaHistorify(filepath: string, options: Options = {}): Middleware {
     }
 
     try {
-      const resolvedPath = await koaSend(
-        ctx,
-        parsedPath.base,
-        { root: parsedPath.dir }
-      )
+      const resolvedPath = await koaSend(ctx, base, { root: dir })
       logger(`Historify from ${ctx.url} to ${resolvedPath} [successfully]`)
     } catch (err) {
       logger(`Not historify ${ctx.url} [${err.toString()}]`)
