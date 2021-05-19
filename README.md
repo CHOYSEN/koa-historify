@@ -3,7 +3,7 @@
 [![NPM version][npm-img]][npm-url]
 [![License][license-image]][license-url]
 
-HTML5 History-API middleware for koa2 
+HTML5 History-API middleware for Koa2 
 
 English | [中文](https://github.com/CHOYSEN/koa-historify/blob/master/README-zh_CN.md)
 
@@ -27,7 +27,7 @@ const indexPath = path.join(__dirname, 'static/index.html' /* index.html filepat
 
 const app = new Koa()
 // ...
-// ensure koa-historify is used after other middleware, otherwise use the `prepose` mode
+// Ensure koa-historify is used after other middlewares, otherwise please use the `prepose` mode
 app.use(koaHistorify(indexPath)) 
 app.listen(80)
 ```

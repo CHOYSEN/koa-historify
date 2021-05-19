@@ -7,7 +7,7 @@
   "types": "types/index.d.ts",
   "bugs": "https://github.com/CHOYSEN/koa-historify/issues",
   "homepage": "https://github.com/CHOYSEN/koa-historify#readme",
-  "description": "HTML5 history middleware for koa2.",
+  "description": "HTML5 history middleware for Koa2.",
   "scripts": {
     "test": "jest --coverage",
     "lint": "eslint src --ext .ts",
@@ -24,11 +24,12 @@
     "README-zh_CN.md"
   ],
   "keywords": [
-    "vue",
     "koa",
     "koa2",
     "html5",
-    "history"
+    "history",
+    "spa",
+    "single page application"
   ],
   "dependencies": {
     "koa-send": "^5.0.1"
