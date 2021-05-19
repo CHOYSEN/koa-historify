@@ -32,7 +32,7 @@ app.use(koaHistorify(indexPath))
 app.listen(80)
 ```
 
-## Options
+## 配置选项
 ### logger
 你可以传入一个函数来记录日志
 ```js
@@ -42,7 +42,7 @@ app.use(koaHistorify(indexPath, {
 ```
 
 ### prepose
-在 prepose 模式下，它可以在其他中间件使用之前使用
+在 prepose 模式下，你可以在其他中间件被使用前使用它
 ```js
 // ...
 const staticPath = path.join(__dirname, 'static')
