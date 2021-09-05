@@ -1,7 +1,6 @@
 import fs from 'fs'
 import Koa from 'koa'
 import path from 'path'
-import Router from '@koa/router'
 import supertest from 'supertest'
 import koaHistorify from '../src'
 
@@ -42,15 +41,15 @@ describe('Test options:', () => {
 
   it('should work when prepose mode', async () => {
     const content = 'ctx.body has been modified'
-    const router = new Router()
-      .get('/api', async (ctx, next) => {
-        ctx.body = content
-        await next()
-      })
 
     const server = new Koa()
       .use(koaHistorify(indexPath, { prepose: true }))
-      .use(router.routes())
+      .use(async (ctx, next) => {
+        if (ctx.url === '/api') {
+          ctx.body = content
+        }
+        await next()
+      })
       .listen()
 
     let res = await supertest(server).get('/').set('Accept', 'text/html')
@@ -126,14 +125,14 @@ describe('Test ctx.body or ctx.status has been modified:', () => {
 
   it("should not historify when ctx.body has been modified", async () => {
     const content = 'ctx.body has been modified'
-    const router = new Router()
-      .get('/api', async (ctx, next) => {
-        ctx.body = content
-        await next()
-      })
 
     const server = new Koa()
-      .use(router.routes())
+      .use(async (ctx, next) => {
+        if (ctx.url === '/api') {
+          ctx.body = content
+        }
+        await next()
+      })
       .use(koaHistorify(indexPath))
       .listen()
 
