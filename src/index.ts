@@ -35,7 +35,7 @@ function koaHistorify(filepath: string, options: Options = {}): Middleware {
       return
     }
 
-    if (ctx.status !== 404 || ctx.body !== undefined) {
+    if (ctx.status !== 404 || ctx.body != null) {
       logger(`Not historify ${ctx.url} [was handled by other middleware]`)
       !prepose && await next()
       return
