@@ -9,9 +9,11 @@
   "homepage": "https://github.com/CHOYSEN/koa-historify#readme",
   "description": "HTML5 history middleware for Koa2.",
   "scripts": {
+    "prepare": "husky install",
     "test": "jest --coverage",
-    "lint": "eslint src --ext .ts",
-    "build": "npm run lint && npm run test && tsc"
+    "lint": "eslint . --ext .ts",
+    "format": "prettier --ignore-unknown --write .",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -35,17 +37,27 @@
     "koa-send": "^5.0.1"
   },
   "devDependencies": {
+    "@types/eslint": "^7.28.0",
     "@types/jest": "^27.0.1",
     "@types/koa": "^2.13.4",
     "@types/koa-send": "^4.1.3",
+    "@types/prettier": "^2.3.2",
     "@types/supertest": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^4.30.0",
     "@typescript-eslint/parser": "^4.30.0",
     "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "husky": "^7.0.2",
     "jest": "^27.1.0",
     "koa": "^2.13.1",
+    "lint-staged": "^11.1.2",
+    "prettier": "^2.3.2",
     "supertest": "^6.1.6",
     "ts-jest": "^27.0.5",
     "typescript": "^4.4.2"
+  },
+  "lint-staged": {
+    "*": "prettier --ignore-unknown --write",
+    "*.ts": "eslint"
   }
 }
