@@ -1,7 +1,7 @@
-import type { Middleware } from 'koa';
+import type { Middleware } from 'koa'
 interface Options {
-    prepose?: boolean;
-    logger?: (msg: string, ...params: any[]) => void;
+  prepose?: boolean
+  logger?: (msg: string) => void
 }
-declare function koaHistorify(filepath: string, options?: Options): Middleware;
-export = koaHistorify;
+declare function koaHistorify(filepath: string, options?: Options): Middleware
+export = koaHistorify
