@@ -4,7 +4,7 @@ import type { Middleware } from 'koa'
 
 interface Options {
   prepose?: boolean
-  logger?: (msg: string, ...params) => void
+  logger?: (msg: string) => void
 }
 
 function koaHistorify(filepath: string, options: Options = {}): Middleware {
@@ -29,7 +29,7 @@ function koaHistorify(filepath: string, options: Options = {}): Middleware {
       return
     }
 
-    if (!ctx.headers.accept?.includes?.('text/html')) {
+    if (!ctx.headers.accept?.includes('text/html')) {
       logger(`Not historify ${ctx.url} [not accept html]`)
       !prepose && await next()
       return
