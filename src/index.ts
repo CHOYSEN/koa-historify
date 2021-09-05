@@ -14,7 +14,9 @@ function koaHistorify(filepath: string, options: Options = {}): Middleware {
 
   const {
     prepose = false,
-    logger = () => { /* do nothing */ }
+    logger = () => {
+      /* do nothing */
+    }
   } = options
   if (typeof logger !== 'function') {
     throw new TypeError('options.logger must be a function')
@@ -22,22 +24,22 @@ function koaHistorify(filepath: string, options: Options = {}): Middleware {
 
   const { dir, base } = path.parse(filepath)
   return async function historify(ctx, next) {
-    prepose && await next()
+    prepose && (await next())
     if (ctx.method !== 'GET') {
       logger(`Not historify ${ctx.url} [not GET]`)
-      !prepose && await next()
+      !prepose && (await next())
       return
     }
 
     if (!ctx.headers.accept?.includes('text/html')) {
       logger(`Not historify ${ctx.url} [not accept html]`)
-      !prepose && await next()
+      !prepose && (await next())
       return
     }
 
     if (ctx.status !== 404 || ctx.body != null) {
       logger(`Not historify ${ctx.url} [was handled by other middleware]`)
-      !prepose && await next()
+      !prepose && (await next())
       return
     }
 
@@ -46,7 +48,7 @@ function koaHistorify(filepath: string, options: Options = {}): Middleware {
       logger(`Historify from ${ctx.url} to ${resolvedPath} [successfully]`)
     } catch (err) {
       logger(`Not historify ${ctx.url} [${err.toString()}]`)
-      !prepose && await next()
+      !prepose && (await next())
     }
   }
 }
