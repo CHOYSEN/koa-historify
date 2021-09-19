@@ -5,7 +5,6 @@
     "target": "ES2019",
     "module": "CommonJS",
     "declaration": true,
-    "declarationDir": "types",
     "esModuleInterop": true
   }
 }
