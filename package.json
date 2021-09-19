@@ -1,10 +1,10 @@
 {
   "name": "koa-historify",
   "version": "1.0.0",
-  "main": "dist/index.js",
   "author": "CHOYSEN",
   "license": "MIT",
-  "types": "types/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "bugs": "https://github.com/CHOYSEN/koa-historify/issues",
   "homepage": "https://github.com/CHOYSEN/koa-historify#readme",
   "description": "HTML5 history middleware for Koa2.",
@@ -21,7 +21,6 @@
   },
   "files": [
     "dist",
-    "types",
     "README.md",
     "README-zh_CN.md"
   ],
