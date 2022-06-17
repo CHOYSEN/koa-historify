@@ -2,6 +2,8 @@ import fs from 'fs'
 import Koa from 'koa'
 import path from 'path'
 import supertest from 'supertest'
+import { it, test, expect, describe } from 'vitest'
+
 import koaHistorify from '../src'
 
 const indexPath = path.join(__dirname, 'static/index.html')
@@ -9,10 +11,12 @@ const indexFile = fs.readFileSync(indexPath).toString()
 
 describe('Test options:', () => {
   test('"filepath" must be a string', () => {
+    // @ts-expect-error test error arg
     expect(() => koaHistorify(null)).toThrow('filepath must be a string')
   })
 
   test('"options.logger" must be a function', () => {
+    // @ts-expect-error test error arg
     expect(() => koaHistorify(indexPath, { logger: null })).toThrow(
       'options.logger must be a function'
     )
