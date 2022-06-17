@@ -12,7 +12,7 @@
     "prepare": "husky install",
     "test": "jest --coverage",
     "lint": "eslint . --ext .ts",
-    "format": "prettier --ignore-unknown --write .",
+    "format": "prettier --ignore-unknown --ignore-path .gitignore --write .",
     "build": "tsc"
   },
   "repository": {
@@ -36,11 +36,9 @@
     "koa-send": "^5.0.1"
   },
   "devDependencies": {
-    "@types/eslint": "8.4.3",
     "@types/jest": "27.4.1",
     "@types/koa": "2.13.4",
     "@types/koa-send": "4.1.3",
-    "@types/prettier": "2.6.3",
     "@types/supertest": "2.0.12",
     "@typescript-eslint/eslint-plugin": "5.21.0",
     "@typescript-eslint/parser": "5.21.0",
@@ -54,6 +52,18 @@
     "supertest": "6.2.2",
     "ts-jest": "27.1.4",
     "typescript": "4.6.3"
+  },
+  "eslintConfig": {
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended",
+      "prettier"
+    ]
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "none"
   },
   "lint-staged": {
     "*": "prettier --ignore-unknown --write",
