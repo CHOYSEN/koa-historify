@@ -8,11 +8,11 @@ specifiers:
   '@typescript-eslint/parser': 5.28.0
   eslint: 8.18.0
   eslint-config-prettier: 8.5.0
-  husky: 8.0.1
   koa: 2.13.4
   koa-send: ^5.0.1
   lint-staged: 13.0.2
   prettier: 2.7.1
+  simple-git-hooks: ^2.8.0
   supertest: 6.2.3
   typescript: 4.7.4
   vitest: ^0.15.1
@@ -28,10 +28,10 @@ devDependencies:
   '@typescript-eslint/parser': 5.28.0_b5e7v2qnwxfo6hmiq56u52mz3e
   eslint: 8.18.0
   eslint-config-prettier: 8.5.0_eslint@8.18.0
-  husky: 8.0.1
   koa: 2.13.4
   lint-staged: 13.0.2
   prettier: 2.7.1
+  simple-git-hooks: 2.8.0
   supertest: 6.2.3
   typescript: 4.7.4
   vitest: 0.15.1
@@ -1787,15 +1787,6 @@ packages:
     engines: { node: '>=12.20.0' }
     dev: true
 
-  /husky/8.0.1:
-    resolution:
-      {
-        integrity: sha512-xs7/chUH/CKdOCs7Zy0Aev9e/dKOMZf3K1Az1nar3tzlv0jfqnYtu235bstsWTmXOR0EfINrPa97yy4Lz6RiKw==
-      }
-    engines: { node: '>=14' }
-    hasBin: true
-    dev: true
-
   /ignore/5.2.0:
     resolution:
       {
@@ -2691,6 +2682,15 @@ packages:
       {
         integrity: sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==
       }
+    dev: true
+
+  /simple-git-hooks/2.8.0:
+    resolution:
+      {
+        integrity: sha512-ocmZQORwa6x9mxg+gVIAp5o4wXiWOHGXyrDBA0+UxGKIEKOyFtL4LWNKkP/2ornQPdlnlDGDteVeYP5FjhIoWA==
+      }
+    hasBin: true
+    requiresBuild: true
     dev: true
 
   /slash/3.0.0:
