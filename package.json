@@ -12,7 +12,8 @@
     "test": "vitest run",
     "lint": "eslint . --ext .ts",
     "format": "prettier --ignore-unknown --ignore-path .gitignore --write .",
-    "build": "tsc"
+    "build": "tsc",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "repository": {
     "type": "git",
@@ -40,6 +41,7 @@
     "@types/supertest": "2.0.12",
     "@typescript-eslint/eslint-plugin": "5.28.0",
     "@typescript-eslint/parser": "5.28.0",
+    "conventional-changelog-cli": "^2.2.2",
     "eslint": "8.18.0",
     "eslint-config-prettier": "8.5.0",
     "koa": "2.13.4",
