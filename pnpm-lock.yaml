@@ -14,7 +14,7 @@ specifiers:
   lint-staged: 13.0.2
   prettier: 2.7.1
   simple-git-hooks: ^2.8.0
-  supertest: 6.2.3
+  supertest: 6.2.4
   typescript: 4.7.4
   vitest: ^0.15.1
 
@@ -34,7 +34,7 @@ devDependencies:
   lint-staged: 13.0.2
   prettier: 2.7.1
   simple-git-hooks: 2.8.0
-  supertest: 6.2.3
+  supertest: 6.2.4
   typescript: 4.7.4
   vitest: 0.15.1
 
@@ -2446,6 +2446,7 @@ packages:
   /qs/6.10.5:
     resolution: {integrity: sha512-O5RlPh0VFtR78y79rgcgKK4wbAI0C5zGVLztOIdpWX6ep368q5Hv6XRxDvXuZ9q3C6v+e3n8UfZZJw7IIG27eQ==}
     engines: {node: '>=0.6'}
+    deprecated: when using stringify with arrayFormat comma, `[]` is appended on single-item arrays. Upgrade to v6.11.0 or downgrade to v6.10.4 to fix.
     dependencies:
       side-channel: 1.0.4
     dev: true
@@ -2818,8 +2819,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /superagent/7.1.6:
-    resolution: {integrity: sha512-gZkVCQR1gy/oUXr+kxJMLDjla434KmSOKbx5iGD30Ql+AkJQ/YlPKECJy2nhqOsHLjGHzoDTXNSjhnvWhzKk7g==}
+  /superagent/8.0.0:
+    resolution: {integrity: sha512-iudipXEel+SzlP9y29UBWGDjB+Zzag+eeA1iLosaR2YHBRr1Q1kC29iBrF2zIVD9fqVbpZnXkN/VJmwFMVyNWg==}
     engines: {node: '>=6.4.0 <13 || >=14'}
     dependencies:
       component-emitter: 1.3.0
@@ -2837,12 +2838,12 @@ packages:
       - supports-color
     dev: true
 
-  /supertest/6.2.3:
-    resolution: {integrity: sha512-3GSdMYTMItzsSYjnIcljxMVZKPW1J9kYHZY+7yLfD0wpPwww97GeImZC1oOk0S5+wYl2niJwuFusBJqwLqYM3g==}
-    engines: {node: '>=6.0.0'}
+  /supertest/6.2.4:
+    resolution: {integrity: sha512-M8xVnCNv+q2T2WXVzxDECvL2695Uv2uUj2O0utxsld/HRyJvOU8W9f1gvsYxSNU4wmIe0/L/ItnpU4iKq0emDA==}
+    engines: {node: '>=6.4.0'}
     dependencies:
       methods: 1.1.2
-      superagent: 7.1.6
+      superagent: 8.0.0
     transitivePeerDependencies:
       - supports-color
     dev: true
